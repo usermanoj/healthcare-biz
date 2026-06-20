@@ -1,0 +1,94 @@
+check_type,field,rule,expected,observed,violation_count,denominator,violation_rate,severity
+missing_value,age,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,age_band,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,billed_amount,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,billed_amount_outlier_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,billing_before_visit_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,billing_day_of_week,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,billing_lag_days,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,billing_month,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,chronic_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,city,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,days_since_registration,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,department,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,doctor_id,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,gender,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,high_billed_amount_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,insurance_provider,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,length_of_stay_hours,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,length_of_stay_hours_outlier_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,patient_prior_avg_los_hours,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,patient_prior_avg_los_missing_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,patient_prior_visit_count,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,provider_prior_claim_count,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,provider_prior_rejection_missing_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,provider_prior_rejection_rate,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,same_day_billing_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,visit_before_registration_flag,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,visit_day_of_week,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,visit_is_weekend,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,visit_month,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,visit_quarter,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,visit_type,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+missing_value,visit_week_of_year,Required model input should be populated.,missing_count = 0,missing_count = 0,0,5000,0.0,pass
+unseen_category,age_band,Incoming category should be present in reference data.,"[""0-17"", ""18-35"", ""36-50"", ""51-65"", ""66+""]",[],0,5000,0.0,pass
+unseen_category,city,Incoming category should be present in reference data.,"[""Bangalore"", ""Chennai"", ""Delhi"", ""Hyderabad"", ""Mumbai"", ""Pune""]",[],0,5000,0.0,pass
+unseen_category,department,Incoming category should be present in reference data.,"[""Cardiology"", ""ER"", ""General"", ""ICU"", ""Neurology"", ""Orthopedics""]",[],0,5000,0.0,pass
+unseen_category,doctor_id,Incoming category should be present in reference data.,"[""100"", ""101"", ""102"", ""103"", ""104"", ""105"", ""106"", ""107"", ""108"", ""109"", ""110"", ""111"", ""112"", ""113"", ""114"", ""115"", ""116"", ""117"", ""118"", ""119"", ""120"", ""121"", ""122"", ""123"", ""124"", ""125"", ""126"", ""127"", ""128"", ""129"", ""130"", ""131"", ""132"", ""133"", ""134"", ""135"", ""136"", ""137"", ""138"", ""139"", ""140"", ""141"", ""142"", ""143"", ""144"", ""145"", ""146"", ""147"", ""148"", ""149"", ""150"", ""151"", ""152"", ""153"", ""154"", ""155"", ""156"", ""157"", ""158"", ""159"", ""160"", ""161"", ""162"", ""163"", ""164"", ""165"", ""166"", ""167"", ""168"", ""169"", ""170"", ""171"", ""172"", ""173"", ""174"", ""175"", ""176"", ""177"", ""178"", ""179"", ""180"", ""181"", ""182"", ""183"", ""184"", ""185"", ""186"", ""187"", ""188"", ""189"", ""190"", ""191"", ""192"", ""193"", ""194"", ""195"", ""196"", ""197"", ""198"", ""199"", ""200""]",[],0,5000,0.0,pass
+unseen_category,gender,Incoming category should be present in reference data.,"[""F"", ""M""]",[],0,5000,0.0,pass
+unseen_category,insurance_provider,Incoming category should be present in reference data.,"[""CareOne"", ""HealthPlus"", ""MediCareX"", ""SecureLife""]",[],0,5000,0.0,pass
+unseen_category,visit_type,Incoming category should be present in reference data.,"[""ER"", ""ICU"", ""OPD""]",[],0,5000,0.0,pass
+reference_range,age,Incoming numeric values should remain within observed reference min/max.,"[1.0, 90.0]","min=1.0, max=90.0",0,5000,0.0,pass
+business_range,age,Incoming numeric values should pass business validity limits.,>= 0 and <= 120,"min=1.0, max=90.0",0,5000,0.0,pass
+reference_range,approved_amount,Incoming numeric values should remain within observed reference min/max.,"[0.0, 84133.09]","min=0.0, max=88539.01",1,4753,0.00021,warn
+business_range,approved_amount,Incoming numeric values should pass business validity limits.,>= 0,"min=0.0, max=88539.01",0,4753,0.0,pass
+reference_range,billed_amount,Incoming numeric values should remain within observed reference min/max.,"[500.0, 84133.09]","min=500.0, max=88539.01",1,5000,0.0002,warn
+business_range,billed_amount,Incoming numeric values should pass business validity limits.,>= 0,"min=500.0, max=88539.01",0,5000,0.0,pass
+reference_range,billed_amount_outlier_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+business_range,billed_amount_outlier_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,billing_before_visit_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+business_range,billing_before_visit_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,billing_day_of_week,Incoming numeric values should remain within observed reference min/max.,"[0.0, 6.0]","min=0.0, max=6.0",0,5000,0.0,pass
+business_range,billing_day_of_week,Incoming numeric values should pass business validity limits.,>= 0 and <= 6,"min=0.0, max=6.0",0,5000,0.0,pass
+reference_range,billing_lag_days,Incoming numeric values should remain within observed reference min/max.,"[-362.0, 291.0]","min=-67.0, max=364.0",488,5000,0.0976,warn
+reference_range,billing_month,Incoming numeric values should remain within observed reference min/max.,"[1.0, 11.0]","min=1.0, max=12.0",2163,5000,0.4326,warn
+business_range,billing_month,Incoming numeric values should pass business validity limits.,>= 1 and <= 12,"min=1.0, max=12.0",0,5000,0.0,pass
+reference_range,chronic_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+business_range,chronic_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,days_since_registration,Incoming numeric values should remain within observed reference min/max.,"[-364.0, 364.0]","min=-359.0, max=356.0",0,5000,0.0,pass
+reference_range,high_billed_amount_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+business_range,high_billed_amount_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,length_of_stay_hours,Incoming numeric values should remain within observed reference min/max.,"[0.5, 77.42]","min=0.5, max=78.42",1,5000,0.0002,warn
+business_range,length_of_stay_hours,Incoming numeric values should pass business validity limits.,>= 0,"min=0.5, max=78.42",0,5000,0.0,pass
+reference_range,length_of_stay_hours_outlier_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+business_range,length_of_stay_hours_outlier_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,patient_prior_avg_los_hours,Incoming numeric values should remain within observed reference min/max.,"[0.5, 72.47]","min=0.5, max=63.21",0,5000,0.0,pass
+business_range,patient_prior_avg_los_hours,Incoming numeric values should pass business validity limits.,>= 0,"min=0.5, max=63.21",0,5000,0.0,pass
+reference_range,patient_prior_avg_los_missing_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+business_range,patient_prior_avg_los_missing_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,patient_prior_visit_count,Incoming numeric values should remain within observed reference min/max.,"[0.0, 14.0]","min=0.0, max=13.0",0,5000,0.0,pass
+business_range,patient_prior_visit_count,Incoming numeric values should pass business validity limits.,>= 0,"min=0.0, max=13.0",0,5000,0.0,pass
+reference_range,payment_days,Incoming numeric values should remain within observed reference min/max.,"[1.0, 51.0]","min=1.0, max=55.0",2,4841,0.000413,warn
+business_range,payment_days,Incoming numeric values should pass business validity limits.,>= 0,"min=1.0, max=55.0",0,4841,0.0,pass
+reference_range,provider_prior_claim_count,Incoming numeric values should remain within observed reference min/max.,"[0.0, 5205.0]","min=4755.0, max=6531.0",4176,5000,0.8352,warn
+business_range,provider_prior_claim_count,Incoming numeric values should pass business validity limits.,>= 0,"min=4755.0, max=6531.0",0,5000,0.0,pass
+reference_range,provider_prior_rejection_missing_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=0.0",0,5000,0.0,pass
+business_range,provider_prior_rejection_missing_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=0.0",0,5000,0.0,pass
+reference_range,provider_prior_rejection_rate,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.147566, max=0.159308",0,5000,0.0,pass
+business_range,provider_prior_rejection_rate,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.147566, max=0.159308",0,5000,0.0,pass
+reference_range,same_day_billing_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+business_range,same_day_billing_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,visit_before_registration_flag,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+business_range,visit_before_registration_flag,Incoming numeric values should pass business validity limits.,>= 0 and <= 1,"min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,visit_day_of_week,Incoming numeric values should remain within observed reference min/max.,"[0.0, 6.0]","min=0.0, max=6.0",0,5000,0.0,pass
+business_range,visit_day_of_week,Incoming numeric values should pass business validity limits.,>= 0 and <= 6,"min=0.0, max=6.0",0,5000,0.0,pass
+reference_range,visit_is_weekend,Incoming numeric values should remain within observed reference min/max.,"[0.0, 1.0]","min=0.0, max=1.0",0,5000,0.0,pass
+reference_range,visit_month,Incoming numeric values should remain within observed reference min/max.,"[1.0, 12.0]","min=1.0, max=12.0",0,5000,0.0,pass
+business_range,visit_month,Incoming numeric values should pass business validity limits.,>= 1 and <= 12,"min=1.0, max=12.0",0,5000,0.0,pass
+reference_range,visit_quarter,Incoming numeric values should remain within observed reference min/max.,"[1.0, 4.0]","min=1.0, max=4.0",0,5000,0.0,pass
+business_range,visit_quarter,Incoming numeric values should pass business validity limits.,>= 1 and <= 4,"min=1.0, max=4.0",0,5000,0.0,pass
+reference_range,visit_week_of_year,Incoming numeric values should remain within observed reference min/max.,"[1.0, 52.0]","min=1.0, max=52.0",0,5000,0.0,pass
+business_range,visit_week_of_year,Incoming numeric values should pass business validity limits.,>= 1 and <= 53,"min=1.0, max=52.0",0,5000,0.0,pass
+critical_field_quality,approved_amount,Critical Phase 2 reliability field should be non-missing and non-negative.,missing = 0 and negative = 0,"missing=247, negative=0",247,5000,0.0494,fail
+critical_field_quality,payment_days,Critical Phase 2 reliability field should be non-missing and non-negative.,missing = 0 and negative = 0,"missing=159, negative=0",159,5000,0.0318,fail
+critical_field_quality,length_of_stay_hours,Critical Phase 2 reliability field should be non-missing and non-negative.,missing = 0 and negative = 0,"missing=0, negative=0",0,5000,0.0,pass

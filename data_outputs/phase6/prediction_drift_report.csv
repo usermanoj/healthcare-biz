@@ -1,0 +1,3 @@
+task_name,model_artifact,reference_rows,current_rows,reference_prediction_distribution,current_prediction_distribution,prediction_psi,severity,business_class,reference_business_class_rate,current_business_class_rate
+risk,models/risk_selected_model.joblib,20000,5000,"{'High': 0.36255, 'Medium': 0.3344, 'Low': 0.30305}","{'Low': 0.3566, 'Medium': 0.342, 'High': 0.3014}",0.02018,stable,High,0.36255,0.3014
+claim,models/claim_selected_model.joblib,20000,5000,"{'Paid': 0.42875, 'Rejected': 0.37325, 'Pending': 0.198}","{'Paid': 0.5772, 'Rejected': 0.3408, 'Pending': 0.082}",0.149347,watch,Rejected,0.37325,0.3408

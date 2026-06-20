@@ -1,0 +1,208 @@
+{
+  "audit_log": {
+    "api_versions": [
+      "1.0.0"
+    ],
+    "available": true,
+    "duplicate_request_id_count": 4,
+    "first_logged_at_utc": "2026-06-20T07:06:58.237005+00:00",
+    "invalid_line_count": 0,
+    "last_logged_at_utc": "2026-06-20T07:09:08.318626+00:00",
+    "log_path": "logs/prediction_audit_log.jsonl",
+    "missing_required_metadata_count": 0,
+    "model_record_counts": {
+      "claim": 3,
+      "risk": 3
+    },
+    "model_versions": [
+      "claim-v1.0.0-phase3",
+      "risk-v1.0.0-phase3"
+    ],
+    "record_count": 6,
+    "unique_feature_hash_count": 2
+  },
+  "data_validation": {
+    "checks": 93,
+    "failed_checks": 2,
+    "severity_counts": {
+      "fail": 2,
+      "pass": 84,
+      "warn": 7
+    },
+    "warning_checks": 7
+  },
+  "date_windows": {
+    "claim_current": {
+      "end": "2026-01-20",
+      "start": "2025-11-10"
+    },
+    "claim_reference": {
+      "end": "2025-11-10",
+      "start": "2025-01-20"
+    },
+    "risk_current": {
+      "end": "2026-01-20",
+      "start": "2025-11-08"
+    },
+    "risk_reference": {
+      "end": "2025-11-08",
+      "start": "2025-01-20"
+    }
+  },
+  "feature_drift": {
+    "features_evaluated": 52,
+    "severity_counts": {
+      "drift": 10,
+      "stable": 42
+    },
+    "top_drift_features": [
+      {
+        "feature": "provider_prior_claim_count",
+        "feature_type": "numeric",
+        "model_task": "claim",
+        "psi": 12.433856,
+        "severity": "drift"
+      },
+      {
+        "feature": "visit_month",
+        "feature_type": "numeric",
+        "model_task": "risk",
+        "psi": 12.07834,
+        "severity": "drift"
+      },
+      {
+        "feature": "billing_month",
+        "feature_type": "numeric",
+        "model_task": "claim",
+        "psi": 12.018478,
+        "severity": "drift"
+      },
+      {
+        "feature": "visit_week_of_year",
+        "feature_type": "numeric",
+        "model_task": "risk",
+        "psi": 10.49868,
+        "severity": "drift"
+      },
+      {
+        "feature": "provider_prior_rejection_rate",
+        "feature_type": "numeric",
+        "model_task": "claim",
+        "psi": 5.615319,
+        "severity": "drift"
+      },
+      {
+        "feature": "billing_lag_days",
+        "feature_type": "numeric",
+        "model_task": "claim",
+        "psi": 5.38717,
+        "severity": "drift"
+      },
+      {
+        "feature": "visit_quarter",
+        "feature_type": "numeric",
+        "model_task": "risk",
+        "psi": 5.207644,
+        "severity": "drift"
+      },
+      {
+        "feature": "days_since_registration",
+        "feature_type": "numeric",
+        "model_task": "risk",
+        "psi": 4.746542,
+        "severity": "drift"
+      },
+      {
+        "feature": "patient_prior_visit_count",
+        "feature_type": "numeric",
+        "model_task": "risk",
+        "psi": 1.538276,
+        "severity": "drift"
+      },
+      {
+        "feature": "patient_prior_avg_los_hours",
+        "feature_type": "numeric",
+        "model_task": "risk",
+        "psi": 0.369347,
+        "severity": "drift"
+      }
+    ]
+  },
+  "generated_at_utc": "2026-06-20T08:13:07+00:00",
+  "monitoring_method": {
+    "current_window": "Latest 20 percent of records used as a simulated incoming monitoring window.",
+    "feature_drift_metric": "Population Stability Index for numeric and categorical model inputs.",
+    "prediction_drift_metric": "Population Stability Index across predicted class distributions.",
+    "psi_thresholds": {
+      "drift": ">= 0.2",
+      "stable": "< 0.1",
+      "watch": ">= 0.1 and < 0.2"
+    },
+    "reference_window": "Earliest 80 percent of records using the same time ordering as model validation."
+  },
+  "output_artifacts": {
+    "audit_log_summary": "data_outputs/phase6/audit_log_summary.json",
+    "data_validation_report": "data_outputs/phase6/data_validation_report.csv",
+    "feature_drift_report": "data_outputs/phase6/feature_drift_report.csv",
+    "prediction_drift_report": "data_outputs/phase6/prediction_drift_report.csv"
+  },
+  "prediction_drift": {
+    "severity_counts": {
+      "stable": 1,
+      "watch": 1
+    },
+    "tasks": [
+      {
+        "business_class": "High",
+        "current_business_class_rate": 0.3014,
+        "current_prediction_distribution": {
+          "High": 0.3014,
+          "Low": 0.3566,
+          "Medium": 0.342
+        },
+        "current_rows": 5000,
+        "model_artifact": "models/risk_selected_model.joblib",
+        "prediction_psi": 0.02018,
+        "reference_business_class_rate": 0.36255,
+        "reference_prediction_distribution": {
+          "High": 0.36255,
+          "Low": 0.30305,
+          "Medium": 0.3344
+        },
+        "reference_rows": 20000,
+        "severity": "stable",
+        "task_name": "risk"
+      },
+      {
+        "business_class": "Rejected",
+        "current_business_class_rate": 0.3408,
+        "current_prediction_distribution": {
+          "Paid": 0.5772,
+          "Pending": 0.082,
+          "Rejected": 0.3408
+        },
+        "current_rows": 5000,
+        "model_artifact": "models/claim_selected_model.joblib",
+        "prediction_psi": 0.149347,
+        "reference_business_class_rate": 0.37325,
+        "reference_prediction_distribution": {
+          "Paid": 0.42875,
+          "Pending": 0.198,
+          "Rejected": 0.37325
+        },
+        "reference_rows": 20000,
+        "severity": "watch",
+        "task_name": "claim"
+      }
+    ],
+    "tasks_evaluated": 2
+  },
+  "row_counts": {
+    "claim_current_rows": 5000,
+    "claim_reference_rows": 20000,
+    "risk_current_rows": 5000,
+    "risk_reference_rows": 20000,
+    "total_model_table_rows": 25000
+  },
+  "source_model_table": "data_outputs/model_table.csv"
+}
