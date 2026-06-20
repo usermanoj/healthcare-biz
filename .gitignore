@@ -1,0 +1,20 @@
+# Python/runtime noise
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Notebook/editor scratch
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# Local environments and secrets
+.env
+.venv/
+venv/
+env/
+
+# Logs and temporary files
+*.log
+*.tmp
+~$*
