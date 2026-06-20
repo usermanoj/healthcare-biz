@@ -1,0 +1,22 @@
+{
+  "api_versions": [
+    "1.0.0"
+  ],
+  "available": true,
+  "duplicate_request_id_count": 4,
+  "first_logged_at_utc": "2026-06-20T07:06:58.237005+00:00",
+  "invalid_line_count": 0,
+  "last_logged_at_utc": "2026-06-20T07:09:08.318626+00:00",
+  "log_path": "logs/prediction_audit_log.jsonl",
+  "missing_required_metadata_count": 0,
+  "model_record_counts": {
+    "claim": 3,
+    "risk": 3
+  },
+  "model_versions": [
+    "claim-v1.0.0-phase3",
+    "risk-v1.0.0-phase3"
+  ],
+  "record_count": 6,
+  "unique_feature_hash_count": 2
+}
