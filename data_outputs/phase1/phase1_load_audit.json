@@ -1,0 +1,46 @@
+{
+  "database_path": "C:\\Users\\Admin\\OneDrive\\Imp-Continuous-Backup-GDrive\\Study\\Technology\\AI\\IITM\\Capstone-Project-6-Jun-26\\Project\\database\\hospital_operations.db",
+  "loaded_counts": {
+    "raw_patients": 5000,
+    "raw_visits": 25000,
+    "raw_billing": 25000
+  },
+  "typed_table_counts": {
+    "patients": 5000,
+    "visits": 25000,
+    "billing": 25000
+  },
+  "foreign_key_violation_count": 0,
+  "quality_summary": [
+    {
+      "quality_check": "Visits without billing record",
+      "issue_count": 0,
+      "severity": "Critical relationship integrity"
+    },
+    {
+      "quality_check": "Billing records without visit record",
+      "issue_count": 0,
+      "severity": "Critical relationship integrity"
+    },
+    {
+      "quality_check": "Duplicate patient_id values in raw source",
+      "issue_count": 0,
+      "severity": "Primary key integrity"
+    },
+    {
+      "quality_check": "Missing or invalid length_of_stay_hours/payment_days",
+      "issue_count": 790,
+      "severity": "Operational data quality"
+    },
+    {
+      "quality_check": "Visits linked to missing insurance provider",
+      "issue_count": 0,
+      "severity": "Revenue analytics completeness"
+    },
+    {
+      "quality_check": "Temporal anomalies: visit before registration or bill before visit",
+      "issue_count": 20569,
+      "severity": "Business logic consistency"
+    }
+  ]
+}

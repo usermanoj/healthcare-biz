@@ -1,0 +1,7 @@
+quality_check,issue_count,severity
+Billing records without visit record,0,Critical relationship integrity
+Visits without billing record,0,Critical relationship integrity
+Duplicate patient_id values in raw source,0,Primary key integrity
+Missing or invalid length_of_stay_hours/payment_days,790,Operational data quality
+Visits linked to missing insurance provider,0,Revenue analytics completeness
+Temporal anomalies: visit before registration or bill before visit,20569,Business logic consistency
