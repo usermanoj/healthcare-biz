@@ -1,0 +1,4 @@
+segment_column,min_recall_segment,min_business_recall,max_recall_segment,max_business_recall,business_recall_gap,segments_evaluated
+city,Bangalore,0.157895,Pune,0.463415,0.30552,6
+gender,F,0.274621,M,0.330645,0.056024,2
+insurance_provider,CareOne,0.242915,HealthPlus,0.348,0.105085,4

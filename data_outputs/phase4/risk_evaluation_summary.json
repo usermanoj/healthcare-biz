@@ -1,0 +1,145 @@
+{
+  "task_name": "risk",
+  "target": "risk_score",
+  "selected_model": {
+    "model_name": "logistic_regression",
+    "artifact": "models/risk_selected_model.joblib",
+    "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+    "selection_reason": "Baseline selected because macro F1 is within 0.01 of the advanced model and business-critical recall is higher.",
+    "test_macro_f1": 0.330425,
+    "test_weighted_f1": 0.357097,
+    "test_business_recall": 0.301758
+  },
+  "model_purpose": "Prioritize visits for operational and clinical risk triage.",
+  "stakeholders": [
+    "hospital administrators",
+    "clinical operations teams",
+    "doctors"
+  ],
+  "labels": [
+    "Low",
+    "Medium",
+    "High"
+  ],
+  "train_metrics": {
+    "accuracy": 0.36235,
+    "balanced_accuracy": 0.376164,
+    "macro_precision": 0.371616,
+    "macro_recall": 0.376164,
+    "macro_f1": 0.355825,
+    "weighted_f1": 0.372147,
+    "business_class": "High",
+    "business_recall": 0.4202
+  },
+  "test_metrics": {
+    "accuracy": 0.3462,
+    "balanced_accuracy": 0.337394,
+    "macro_precision": 0.338318,
+    "macro_recall": 0.337394,
+    "macro_f1": 0.330425,
+    "weighted_f1": 0.357097,
+    "business_class": "High",
+    "business_recall": 0.301758
+  },
+  "fairness_gap_summary": [
+    {
+      "segment_column": "city",
+      "min_recall_segment": "Bangalore",
+      "min_business_recall": 0.157895,
+      "max_recall_segment": "Pune",
+      "max_business_recall": 0.463415,
+      "business_recall_gap": 0.30552,
+      "segments_evaluated": 6
+    },
+    {
+      "segment_column": "gender",
+      "min_recall_segment": "F",
+      "min_business_recall": 0.274621,
+      "max_recall_segment": "M",
+      "max_business_recall": 0.330645,
+      "business_recall_gap": 0.056024,
+      "segments_evaluated": 2
+    },
+    {
+      "segment_column": "insurance_provider",
+      "min_recall_segment": "CareOne",
+      "min_business_recall": 0.242915,
+      "max_recall_segment": "HealthPlus",
+      "max_business_recall": 0.348,
+      "business_recall_gap": 0.105085,
+      "segments_evaluated": 4
+    }
+  ],
+  "top_explainability_items": [
+    {
+      "class_label": "Medium",
+      "feature": "cat__doctor_id_198",
+      "coefficient": -0.33292702,
+      "abs_coefficient": 0.33292702,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "High",
+      "feature": "cat__doctor_id_198",
+      "coefficient": 0.29546147,
+      "abs_coefficient": 0.29546147,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "Medium",
+      "feature": "cat__doctor_id_110",
+      "coefficient": 0.2871,
+      "abs_coefficient": 0.2871,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "Medium",
+      "feature": "cat__doctor_id_169",
+      "coefficient": -0.27620797,
+      "abs_coefficient": 0.27620797,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "High",
+      "feature": "cat__doctor_id_128",
+      "coefficient": -0.25208254,
+      "abs_coefficient": 0.25208254,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "Low",
+      "feature": "cat__doctor_id_136",
+      "coefficient": 0.25106538,
+      "abs_coefficient": 0.25106538,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "High",
+      "feature": "cat__doctor_id_148",
+      "coefficient": -0.2415164,
+      "abs_coefficient": 0.2415164,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "High",
+      "feature": "cat__doctor_id_137",
+      "coefficient": -0.22822389,
+      "abs_coefficient": 0.22822389,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "High",
+      "feature": "cat__doctor_id_169",
+      "coefficient": 0.22746634,
+      "abs_coefficient": 0.22746634,
+      "explainability_type": "logistic_regression_coefficient"
+    },
+    {
+      "class_label": "High",
+      "feature": "cat__doctor_id_135",
+      "coefficient": 0.22481644,
+      "abs_coefficient": 0.22481644,
+      "explainability_type": "logistic_regression_coefficient"
+    }
+  ]
+}
