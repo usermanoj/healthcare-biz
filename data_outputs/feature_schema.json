@@ -1,0 +1,417 @@
+{
+  "created_at_utc": "2026-06-20T06:15:10+00:00",
+  "source_database": "C:\\Users\\Admin\\OneDrive\\Imp-Continuous-Backup-GDrive\\Study\\Technology\\AI\\IITM\\Capstone-Project-6-Jun-26\\Project\\database\\hospital_operations.db",
+  "source_view": "v_hospital_encounters",
+  "model_table": "C:\\Users\\Admin\\OneDrive\\Imp-Continuous-Backup-GDrive\\Study\\Technology\\AI\\IITM\\Capstone-Project-6-Jun-26\\Project\\data_outputs\\model_table.csv",
+  "row_count": 25000,
+  "column_count": 69,
+  "targets": {
+    "risk_model_target": "risk_score",
+    "claim_model_target": "claim_status"
+  },
+  "identifier_columns": [
+    "visit_id",
+    "patient_id",
+    "bill_id",
+    "doctor_id"
+  ],
+  "raw_date_columns": [
+    "registration_date",
+    "visit_date",
+    "billing_date"
+  ],
+  "raw_categorical_columns": [
+    "gender",
+    "city",
+    "insurance_provider",
+    "department",
+    "visit_type",
+    "age_band"
+  ],
+  "raw_numeric_columns": [
+    "age",
+    "chronic_flag",
+    "length_of_stay_hours",
+    "billed_amount",
+    "approved_amount",
+    "payment_days"
+  ],
+  "engineered_feature_columns": [
+    "patient_total_visits",
+    "patient_avg_los_hours",
+    "patient_prior_visit_count",
+    "patient_prior_avg_los_hours",
+    "provider_total_claims",
+    "provider_rejected_claims",
+    "provider_rejection_rate",
+    "provider_prior_claim_count",
+    "provider_prior_rejected_count",
+    "provider_prior_rejection_rate",
+    "department_avg_los_hours",
+    "department_high_risk_rate",
+    "department_revenue_realization_ratio",
+    "days_since_registration",
+    "billing_lag_days",
+    "visit_year",
+    "visit_month",
+    "visit_quarter",
+    "visit_day_of_week",
+    "visit_week_of_year",
+    "visit_is_weekend",
+    "billing_year",
+    "billing_month",
+    "billing_day_of_week",
+    "approved_to_billed_ratio",
+    "revenue_gap_amount"
+  ],
+  "data_quality_flag_columns": [
+    "patient_prior_avg_los_missing_flag",
+    "provider_prior_rejection_missing_flag",
+    "visit_before_registration_flag",
+    "billing_before_visit_flag",
+    "same_day_billing_flag",
+    "approved_amount_missing_flag",
+    "payment_days_missing_flag",
+    "length_of_stay_missing_flag",
+    "approved_amount_zero_flag",
+    "approved_amount_zero_or_missing_flag",
+    "high_billed_amount_flag",
+    "high_billed_zero_or_missing_approved_flag",
+    "billed_amount_outlier_flag",
+    "payment_days_outlier_flag",
+    "length_of_stay_hours_outlier_flag"
+  ],
+  "leakage_sensitive_columns": {
+    "for_risk_model": [
+      "risk_score",
+      "high_risk_flag",
+      "claim_status",
+      "claim_rejected_flag",
+      "claim_pending_flag",
+      "approved_amount",
+      "payment_days",
+      "approved_to_billed_ratio",
+      "revenue_gap_amount",
+      "visit_realization_ratio"
+    ],
+    "for_claim_model": [
+      "claim_status",
+      "claim_rejected_flag",
+      "claim_pending_flag",
+      "approved_amount",
+      "payment_days",
+      "approved_to_billed_ratio",
+      "revenue_gap_amount",
+      "visit_realization_ratio",
+      "provider_rejection_rate",
+      "provider_rejected_claims"
+    ]
+  },
+  "notes": [
+    "provider_rejection_rate and provider_rejected_claims are useful EDA features but must be recomputed using training data only before claim-outcome modeling.",
+    "approved_amount and payment_days are post-outcome fields for claim prediction and should not be predictors for a pre-submission claim model.",
+    "Temporal anomaly flags are retained because Phase 1 found visit-before-registration and billing-before-visit records."
+  ],
+  "profile": {
+    "encounter_rows": 25000,
+    "model_table_rows": 25000,
+    "model_table_columns": 69,
+    "risk_score_distribution": {
+      "High": 5034,
+      "Low": 12470,
+      "Medium": 7496
+    },
+    "claim_status_distribution": {
+      "Paid": 14940,
+      "Pending": 6263,
+      "Rejected": 3797
+    },
+    "missing_approved_amount_count": 1318,
+    "missing_payment_days_count": 790,
+    "missing_length_of_stay_count": 0,
+    "visit_before_registration_count": 12157,
+    "billing_before_visit_count": 12389,
+    "high_billed_zero_or_missing_approved_count": 72,
+    "total_billed_amount": 521768936.05,
+    "total_approved_amount": 387155888.37,
+    "overall_revenue_realization_ratio": 0.742006
+  },
+  "columns": {
+    "visit_id": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "patient_id": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "bill_id": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "doctor_id": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "age": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "age_band": {
+      "dtype": "str",
+      "missing_count": 0
+    },
+    "gender": {
+      "dtype": "str",
+      "missing_count": 0
+    },
+    "city": {
+      "dtype": "str",
+      "missing_count": 0
+    },
+    "insurance_provider": {
+      "dtype": "str",
+      "missing_count": 0
+    },
+    "chronic_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "registration_date": {
+      "dtype": "datetime64[us]",
+      "missing_count": 0
+    },
+    "visit_date": {
+      "dtype": "datetime64[us]",
+      "missing_count": 0
+    },
+    "billing_date": {
+      "dtype": "datetime64[us]",
+      "missing_count": 0
+    },
+    "department": {
+      "dtype": "str",
+      "missing_count": 0
+    },
+    "visit_type": {
+      "dtype": "str",
+      "missing_count": 0
+    },
+    "length_of_stay_hours": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "billed_amount": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "approved_amount": {
+      "dtype": "float64",
+      "missing_count": 1318
+    },
+    "payment_days": {
+      "dtype": "float64",
+      "missing_count": 790
+    },
+    "risk_score": {
+      "dtype": "str",
+      "missing_count": 0
+    },
+    "claim_status": {
+      "dtype": "str",
+      "missing_count": 0
+    },
+    "patient_total_visits": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "patient_avg_los_hours": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "patient_prior_visit_count": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "patient_prior_avg_los_hours": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "patient_prior_avg_los_missing_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "provider_total_claims": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "provider_rejected_claims": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "provider_rejection_rate": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "provider_prior_claim_count": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "provider_prior_rejected_count": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "provider_prior_rejection_rate": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "provider_prior_rejection_missing_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "department_avg_los_hours": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "department_high_risk_rate": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "department_revenue_realization_ratio": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "days_since_registration": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "billing_lag_days": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "visit_before_registration_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "billing_before_visit_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "same_day_billing_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "visit_year": {
+      "dtype": "int32",
+      "missing_count": 0
+    },
+    "visit_month": {
+      "dtype": "int32",
+      "missing_count": 0
+    },
+    "visit_quarter": {
+      "dtype": "int32",
+      "missing_count": 0
+    },
+    "visit_day_of_week": {
+      "dtype": "int32",
+      "missing_count": 0
+    },
+    "visit_week_of_year": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "visit_is_weekend": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "billing_year": {
+      "dtype": "int32",
+      "missing_count": 0
+    },
+    "billing_month": {
+      "dtype": "int32",
+      "missing_count": 0
+    },
+    "billing_day_of_week": {
+      "dtype": "int32",
+      "missing_count": 0
+    },
+    "approved_amount_missing_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "payment_days_missing_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "length_of_stay_missing_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "approved_amount_zero_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "approved_amount_zero_or_missing_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "approved_to_billed_ratio": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "revenue_gap_amount": {
+      "dtype": "float64",
+      "missing_count": 0
+    },
+    "claim_rejected_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "claim_pending_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "high_risk_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "high_billed_amount_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "high_billed_zero_or_missing_approved_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "billed_amount_outlier_category": {
+      "dtype": "object",
+      "missing_count": 0
+    },
+    "billed_amount_outlier_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "payment_days_outlier_category": {
+      "dtype": "object",
+      "missing_count": 0
+    },
+    "payment_days_outlier_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "length_of_stay_hours_outlier_category": {
+      "dtype": "object",
+      "missing_count": 0
+    },
+    "length_of_stay_hours_outlier_flag": {
+      "dtype": "int64",
+      "missing_count": 0
+    },
+    "visit_realization_ratio": {
+      "dtype": "float64",
+      "missing_count": 1318
+    }
+  }
+}

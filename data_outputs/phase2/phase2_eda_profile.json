@@ -1,0 +1,24 @@
+{
+  "encounter_rows": 25000,
+  "model_table_rows": 25000,
+  "model_table_columns": 69,
+  "risk_score_distribution": {
+    "High": 5034,
+    "Low": 12470,
+    "Medium": 7496
+  },
+  "claim_status_distribution": {
+    "Paid": 14940,
+    "Pending": 6263,
+    "Rejected": 3797
+  },
+  "missing_approved_amount_count": 1318,
+  "missing_payment_days_count": 790,
+  "missing_length_of_stay_count": 0,
+  "visit_before_registration_count": 12157,
+  "billing_before_visit_count": 12389,
+  "high_billed_zero_or_missing_approved_count": 72,
+  "total_billed_amount": 521768936.05,
+  "total_approved_amount": 387155888.37,
+  "overall_revenue_realization_ratio": 0.742006
+}

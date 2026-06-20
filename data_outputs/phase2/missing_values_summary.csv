@@ -1,0 +1,4 @@
+field_name,missing_count,missing_pct,zero_count,non_missing_count
+approved_amount,1318,5.27,3597,23682
+payment_days,790,3.16,0,24210
+length_of_stay_hours,0,0.0,0,25000

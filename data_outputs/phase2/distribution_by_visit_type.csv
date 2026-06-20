@@ -1,0 +1,4 @@
+visit_type,visit_count,patient_count,avg_los_hours,high_risk_rate,rejected_claim_rate,avg_payment_days,total_billed_amount,total_approved_amount,visit_pct,revenue_realization_ratio
+ER,8382,4039,19.4082,0.2059,0.16,12.9952,174903143.09,128799791.32,0.3353,0.7364
+OPD,8381,4127,19.7127,0.2009,0.1477,13.0192,175780335.22,130956499.24,0.3352,0.745
+ICU,8237,4089,19.5336,0.1972,0.1479,13.1317,171085457.74,127399597.81,0.3295,0.7447

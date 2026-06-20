@@ -1,0 +1,5 @@
+quality_check,issue_count,issue_pct
+visit_before_registration,12157,48.63
+billing_before_visit,12389,49.56
+same_day_billing,80,0.32
+high_billed_zero_or_missing_approved,72,0.29
