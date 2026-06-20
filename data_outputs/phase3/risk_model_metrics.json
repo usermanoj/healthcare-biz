@@ -1,0 +1,606 @@
+{
+  "task_name": "risk",
+  "business_name": "Visit Risk Classification",
+  "business_purpose": "Predict whether a hospital visit represents Low, Medium, or High operational/clinical risk to support triage, staffing, and resource planning.",
+  "target": "risk_score",
+  "labels": [
+    "Low",
+    "Medium",
+    "High"
+  ],
+  "features": {
+    "categorical": [
+      "gender",
+      "city",
+      "insurance_provider",
+      "department",
+      "visit_type",
+      "doctor_id",
+      "age_band"
+    ],
+    "numeric": [
+      "age",
+      "chronic_flag",
+      "length_of_stay_hours",
+      "patient_prior_visit_count",
+      "patient_prior_avg_los_hours",
+      "patient_prior_avg_los_missing_flag",
+      "days_since_registration",
+      "visit_before_registration_flag",
+      "visit_month",
+      "visit_quarter",
+      "visit_day_of_week",
+      "visit_week_of_year",
+      "visit_is_weekend"
+    ],
+    "all": [
+      "gender",
+      "city",
+      "insurance_provider",
+      "department",
+      "visit_type",
+      "doctor_id",
+      "age_band",
+      "age",
+      "chronic_flag",
+      "length_of_stay_hours",
+      "patient_prior_visit_count",
+      "patient_prior_avg_los_hours",
+      "patient_prior_avg_los_missing_flag",
+      "days_since_registration",
+      "visit_before_registration_flag",
+      "visit_month",
+      "visit_quarter",
+      "visit_day_of_week",
+      "visit_week_of_year",
+      "visit_is_weekend"
+    ],
+    "leakage_exclusions": [
+      "risk_score",
+      "high_risk_flag",
+      "claim_status",
+      "claim_rejected_flag",
+      "claim_pending_flag",
+      "approved_amount",
+      "payment_days",
+      "approved_to_billed_ratio",
+      "revenue_gap_amount",
+      "visit_realization_ratio",
+      "department_high_risk_rate"
+    ],
+    "feature_justification": {
+      "patient demographics": "age, gender, city, chronic status, and age band capture patient-level risk context.",
+      "visit operations": "department, visit type, doctor assignment, and LOS describe encounter complexity and resource use.",
+      "patient history": "prior visit count and prior average LOS capture repeat-utilization and historical operational burden.",
+      "timing": "visit month, weekday, weekend flag, and registration timing support seasonal and operational-flow analysis.",
+      "quality flags": "temporal anomaly and missing-history flags preserve known reliability issues from Phase 2."
+    }
+  },
+  "split": {
+    "train_rows": 20000,
+    "test_rows": 5000,
+    "train_start": "2025-01-20",
+    "train_end": "2025-11-08",
+    "test_start": "2025-11-08",
+    "test_end": "2026-01-20",
+    "sort_columns": [
+      "visit_date",
+      "visit_id"
+    ]
+  },
+  "class_distribution": {
+    "all": {
+      "High": {
+        "count": 5034,
+        "pct": 20.14
+      },
+      "Low": {
+        "count": 12470,
+        "pct": 49.88
+      },
+      "Medium": {
+        "count": 7496,
+        "pct": 29.98
+      }
+    },
+    "train": {
+      "High": {
+        "count": 4010,
+        "pct": 20.05
+      },
+      "Low": {
+        "count": 9991,
+        "pct": 49.95
+      },
+      "Medium": {
+        "count": 5999,
+        "pct": 30.0
+      }
+    },
+    "test": {
+      "High": {
+        "count": 1024,
+        "pct": 20.48
+      },
+      "Low": {
+        "count": 2479,
+        "pct": 49.58
+      },
+      "Medium": {
+        "count": 1497,
+        "pct": 29.94
+      }
+    }
+  },
+  "imbalance_strategy": {
+    "observed_issue": "Class proportions are not equal; minority classes are evaluated with macro F1 and business-critical recall.",
+    "mitigation": "Use class_weight='balanced' for Logistic Regression and class_weight='balanced_subsample' for Random Forest."
+  },
+  "baseline_logistic_regression": {
+    "artifact": "models/risk_logistic_regression.joblib",
+    "train_metrics": {
+      "accuracy": 0.36235,
+      "balanced_accuracy": 0.376164,
+      "macro_f1": 0.355825,
+      "weighted_f1": 0.372147,
+      "business_recall_class": "High",
+      "business_recall": 0.4202,
+      "classification_report": {
+        "Low": {
+          "precision": 0.5421547599406039,
+          "recall": 0.32889600640576516,
+          "f1-score": 0.4094193869922751,
+          "support": 9991.0
+        },
+        "Medium": {
+          "precision": 0.340311004784689,
+          "recall": 0.3793965660943491,
+          "f1-score": 0.358792464727674,
+          "support": 5999.0
+        },
+        "High": {
+          "precision": 0.23238174044959317,
+          "recall": 0.42019950124688277,
+          "f1-score": 0.2992629429002753,
+          "support": 4010.0
+        },
+        "accuracy": 0.36235,
+        "macro avg": {
+          "precision": 0.3716158350582954,
+          "recall": 0.37616402458233233,
+          "f1-score": 0.3558249315400748,
+          "support": 20000.0
+        },
+        "weighted avg": {
+          "precision": 0.41950223517363955,
+          "recall": 0.36235,
+          "f1-score": 0.37214747461856207,
+          "support": 20000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          3286,
+          3176,
+          3529
+        ],
+        [
+          1686,
+          2276,
+          2037
+        ],
+        [
+          1089,
+          1236,
+          1685
+        ]
+      ],
+      "labels": [
+        "Low",
+        "Medium",
+        "High"
+      ]
+    },
+    "test_metrics": {
+      "accuracy": 0.3462,
+      "balanced_accuracy": 0.337394,
+      "macro_f1": 0.330425,
+      "weighted_f1": 0.357097,
+      "business_recall_class": "High",
+      "business_recall": 0.301758,
+      "classification_report": {
+        "Low": {
+          "precision": 0.5075715086932137,
+          "recall": 0.36506655909640984,
+          "f1-score": 0.4246832473017363,
+          "support": 2479.0
+        },
+        "Medium": {
+          "precision": 0.3023391812865497,
+          "recall": 0.3453573814295257,
+          "f1-score": 0.32241970689117555,
+          "support": 1497.0
+        },
+        "High": {
+          "precision": 0.20504313205043131,
+          "recall": 0.3017578125,
+          "f1-score": 0.24417226392730146,
+          "support": 1024.0
+        },
+        "accuracy": 0.3462,
+        "macro avg": {
+          "precision": 0.33831794067673154,
+          "recall": 0.33739391767531185,
+          "f1-score": 0.33042507270673777,
+          "support": 5000.0
+        },
+        "weighted avg": {
+          "precision": 0.38416713833121663,
+          "recall": 0.3462,
+          "f1-score": 0.35709689390773014,
+          "support": 5000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          905,
+          831,
+          743
+        ],
+        [
+          525,
+          517,
+          455
+        ],
+        [
+          353,
+          362,
+          309
+        ]
+      ],
+      "labels": [
+        "Low",
+        "Medium",
+        "High"
+      ]
+    }
+  },
+  "advanced_random_forest": {
+    "artifact": "models/risk_random_forest.joblib",
+    "best_params": {
+      "n_estimators": 160,
+      "max_depth": 14,
+      "min_samples_leaf": 3
+    },
+    "tuning_results": [
+      {
+        "params": {
+          "n_estimators": 120,
+          "max_depth": 10,
+          "min_samples_leaf": 5
+        },
+        "validation_macro_f1": 0.34151,
+        "validation_weighted_f1": 0.386384,
+        "validation_business_recall": 0.344114
+      },
+      {
+        "params": {
+          "n_estimators": 160,
+          "max_depth": 14,
+          "min_samples_leaf": 3
+        },
+        "validation_macro_f1": 0.352398,
+        "validation_weighted_f1": 0.409947,
+        "validation_business_recall": 0.223803
+      },
+      {
+        "params": {
+          "n_estimators": 200,
+          "max_depth": null,
+          "min_samples_leaf": 5
+        },
+        "validation_macro_f1": 0.337507,
+        "validation_weighted_f1": 0.40352,
+        "validation_business_recall": 0.142303
+      }
+    ],
+    "train_metrics": {
+      "accuracy": 0.7471,
+      "balanced_accuracy": 0.727866,
+      "macro_f1": 0.73628,
+      "weighted_f1": 0.745473,
+      "business_recall_class": "High",
+      "business_recall": 0.711222,
+      "classification_report": {
+        "Low": {
+          "precision": 0.7530715935334873,
+          "recall": 0.8159343409068162,
+          "f1-score": 0.7832436587240584,
+          "support": 9991.0
+        },
+        "Medium": {
+          "precision": 0.721641927799157,
+          "recall": 0.6564427404567428,
+          "f1-score": 0.6875,
+          "support": 5999.0
+        },
+        "High": {
+          "precision": 0.7670790747713825,
+          "recall": 0.7112219451371571,
+          "f1-score": 0.7380952380952381,
+          "support": 4010.0
+        },
+        "accuracy": 0.7471,
+        "macro avg": {
+          "precision": 0.7472641987013423,
+          "recall": 0.7278663421669053,
+          "f1-score": 0.7362796322730989,
+          "support": 20000.0
+        },
+        "weighted avg": {
+          "precision": 0.746452765284673,
+          "recall": 0.7471,
+          "f1-score": 0.7454730899536985,
+          "support": 20000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          8152,
+          1285,
+          554
+        ],
+        [
+          1749,
+          3938,
+          312
+        ],
+        [
+          924,
+          234,
+          2852
+        ]
+      ],
+      "labels": [
+        "Low",
+        "Medium",
+        "High"
+      ]
+    },
+    "test_metrics": {
+      "accuracy": 0.399,
+      "balanced_accuracy": 0.344868,
+      "macro_f1": 0.336759,
+      "weighted_f1": 0.388935,
+      "business_recall_class": "High",
+      "business_recall": 0.109375,
+      "classification_report": {
+        "Low": {
+          "precision": 0.5111834078893859,
+          "recall": 0.5070592981040742,
+          "f1-score": 0.5091130012150669,
+          "support": 2479.0
+        },
+        "Medium": {
+          "precision": 0.31315657828914456,
+          "recall": 0.4181696726786907,
+          "f1-score": 0.35812356979405036,
+          "support": 1497.0
+        },
+        "High": {
+          "precision": 0.2066420664206642,
+          "recall": 0.109375,
+          "f1-score": 0.14303959131545338,
+          "support": 1024.0
+        },
+        "accuracy": 0.399,
+        "macro avg": {
+          "precision": 0.34366068419973156,
+          "recall": 0.3448679902609217,
+          "f1-score": 0.33675872077485686,
+          "support": 5000.0
+        },
+        "weighted avg": {
+          "precision": 0.3895241083742795,
+          "recall": 0.399,
+          "f1-score": 0.3889349311001737,
+          "support": 5000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1257,
+          955,
+          267
+        ],
+        [
+          708,
+          626,
+          163
+        ],
+        [
+          494,
+          418,
+          112
+        ]
+      ],
+      "labels": [
+        "Low",
+        "Medium",
+        "High"
+      ]
+    },
+    "feature_importance_artifact": "data_outputs/phase3/risk_random_forest_feature_importance.csv",
+    "top_feature_importance": [
+      {
+        "feature": "num__length_of_stay_hours",
+        "importance": 0.11533683692104388
+      },
+      {
+        "feature": "num__days_since_registration",
+        "importance": 0.07786415847464592
+      },
+      {
+        "feature": "num__patient_prior_avg_los_hours",
+        "importance": 0.0740866822174823
+      },
+      {
+        "feature": "num__age",
+        "importance": 0.06658619415109854
+      },
+      {
+        "feature": "num__visit_week_of_year",
+        "importance": 0.05770995130094033
+      },
+      {
+        "feature": "num__visit_day_of_week",
+        "importance": 0.04106071987901626
+      },
+      {
+        "feature": "num__visit_month",
+        "importance": 0.03632478603031417
+      },
+      {
+        "feature": "num__patient_prior_visit_count",
+        "importance": 0.03413045619390577
+      },
+      {
+        "feature": "num__visit_quarter",
+        "importance": 0.01750709499928846
+      },
+      {
+        "feature": "num__chronic_flag",
+        "importance": 0.016271388407152157
+      },
+      {
+        "feature": "cat__gender_F",
+        "importance": 0.014361780697048049
+      },
+      {
+        "feature": "cat__gender_M",
+        "importance": 0.013911224395354605
+      },
+      {
+        "feature": "cat__visit_type_ICU",
+        "importance": 0.013481834268559095
+      },
+      {
+        "feature": "cat__visit_type_ER",
+        "importance": 0.013342479521370599
+      },
+      {
+        "feature": "cat__insurance_provider_CareOne",
+        "importance": 0.01242827495649803
+      },
+      {
+        "feature": "cat__insurance_provider_HealthPlus",
+        "importance": 0.012244177721792367
+      },
+      {
+        "feature": "cat__insurance_provider_MediCareX",
+        "importance": 0.01204038665763096
+      },
+      {
+        "feature": "cat__visit_type_OPD",
+        "importance": 0.012010710656792356
+      },
+      {
+        "feature": "cat__age_band_36-50",
+        "importance": 0.011947321798556083
+      },
+      {
+        "feature": "cat__insurance_provider_SecureLife",
+        "importance": 0.011758436691933218
+      },
+      {
+        "feature": "num__visit_before_registration_flag",
+        "importance": 0.01170065158435014
+      },
+      {
+        "feature": "num__visit_is_weekend",
+        "importance": 0.011039708367680253
+      },
+      {
+        "feature": "cat__department_Cardiology",
+        "importance": 0.010850635540866235
+      },
+      {
+        "feature": "cat__age_band_18-35",
+        "importance": 0.01075042245879015
+      },
+      {
+        "feature": "cat__city_Bangalore",
+        "importance": 0.010274602194597936
+      },
+      {
+        "feature": "cat__department_ER",
+        "importance": 0.009915634171579688
+      },
+      {
+        "feature": "cat__age_band_51-65",
+        "importance": 0.009543661194647028
+      },
+      {
+        "feature": "cat__city_Delhi",
+        "importance": 0.009296706176685791
+      },
+      {
+        "feature": "cat__city_Pune",
+        "importance": 0.009253641842410367
+      },
+      {
+        "feature": "cat__city_Mumbai",
+        "importance": 0.009213330529848976
+      },
+      {
+        "feature": "cat__city_Hyderabad",
+        "importance": 0.009117106179846488
+      },
+      {
+        "feature": "cat__department_General",
+        "importance": 0.008896969065861158
+      },
+      {
+        "feature": "cat__department_Orthopedics",
+        "importance": 0.00878594587017521
+      },
+      {
+        "feature": "cat__department_ICU",
+        "importance": 0.008686544339089403
+      },
+      {
+        "feature": "cat__city_Chennai",
+        "importance": 0.008405826169155715
+      },
+      {
+        "feature": "cat__department_Neurology",
+        "importance": 0.00833871617708038
+      },
+      {
+        "feature": "num__patient_prior_avg_los_missing_flag",
+        "importance": 0.008325679533719236
+      },
+      {
+        "feature": "cat__age_band_66+",
+        "importance": 0.007172098101590625
+      },
+      {
+        "feature": "cat__age_band_0-17",
+        "importance": 0.004377524837683145
+      },
+      {
+        "feature": "cat__doctor_id_198",
+        "importance": 0.003037895886370081
+      }
+    ]
+  },
+  "selected_model": {
+    "model_name": "logistic_regression",
+    "artifact": "models/risk_selected_model.joblib",
+    "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+    "selection_reason": "Baseline selected because macro F1 is within 0.01 of the advanced model and business-critical recall is higher.",
+    "test_macro_f1": 0.330425,
+    "test_weighted_f1": 0.357097,
+    "test_business_recall": 0.301758
+  }
+}
