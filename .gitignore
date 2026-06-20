@@ -16,6 +16,7 @@ venv/
 env/
 
 # Logs and temporary files
+logs/
 *.log
 *.tmp
 ~$*

@@ -1,0 +1,14 @@
+{
+  "api_url": "http://127.0.0.1:8000",
+  "server_verified": true,
+  "verified_endpoints": [
+    "GET /health",
+    "GET /version",
+    "POST /predict/risk",
+    "POST /predict/claim"
+  ],
+  "risk_sample_prediction": "High",
+  "claim_sample_prediction": "Paid",
+  "prediction_logging_verified": true,
+  "audit_log_path": "logs/prediction_audit_log.jsonl"
+}
