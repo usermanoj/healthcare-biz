@@ -1,0 +1,50 @@
+{
+  "health": {
+    "status": "ok",
+    "api_version": "1.0.0",
+    "models_loaded": {
+      "risk": true,
+      "claim": true
+    },
+    "log_path": "C:\\Users\\Admin\\OneDrive\\Imp-Continuous-Backup-GDrive\\Study\\Technology\\AI\\IITM\\Capstone-Project-6-Jun-26\\Project\\logs\\prediction_audit_log.jsonl",
+    "checked_at_utc": "2026-06-20T07:08:17.464112Z"
+  },
+  "risk_prediction": {
+    "request_id": "risk-demo-001",
+    "model_name": "risk",
+    "model_version": "risk-v1.0.0-phase3",
+    "prediction": "High",
+    "probabilities": {
+      "High": 0.424304,
+      "Low": 0.276604,
+      "Medium": 0.299092
+    },
+    "feature_hash": "26939e0f6a20b99dd04e13e11307931939f158774f38214fb57f825a65fb9aa7",
+    "logged": true,
+    "generated_at_utc": "2026-06-20T07:08:17.476639Z"
+  },
+  "claim_prediction": {
+    "request_id": "claim-demo-001",
+    "model_name": "claim",
+    "model_version": "claim-v1.0.0-phase3",
+    "prediction": "Paid",
+    "probabilities": {
+      "Paid": 0.553112,
+      "Pending": 0.332504,
+      "Rejected": 0.114384
+    },
+    "feature_hash": "d41df45eafdeb57baf432819617ed95ed92300dfc3b48850ab433deafd111eb6",
+    "logged": true,
+    "generated_at_utc": "2026-06-20T07:08:17.526081Z"
+  },
+  "version": {
+    "api_version": "1.0.0",
+    "risk_model_version": "risk-v1.0.0-phase3",
+    "claim_model_version": "claim-v1.0.0-phase3",
+    "model_loaded": {
+      "risk": true,
+      "claim": true
+    },
+    "generated_at_utc": "2026-06-20T07:08:17.532148Z"
+  }
+}
