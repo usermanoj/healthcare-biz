@@ -413,5 +413,49 @@
       "dtype": "float64",
       "missing_count": 1318
     }
+  },
+  "phase3_model_development": {
+    "updated_at_utc": "2026-06-20T06:40:35+00:00",
+    "risk_model": {
+      "target": "risk_score",
+      "selected_model": {
+        "model_name": "logistic_regression",
+        "artifact": "models/risk_selected_model.joblib",
+        "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+        "selection_reason": "Baseline selected because macro F1 is within 0.01 of the advanced model and business-critical recall is higher.",
+        "test_macro_f1": 0.330425,
+        "test_weighted_f1": 0.357097,
+        "test_business_recall": 0.301758
+      },
+      "feature_set_artifact": "data_outputs/phase3/risk_feature_set.json",
+      "metrics_artifact": "data_outputs/phase3/risk_model_metrics.json"
+    },
+    "claim_model": {
+      "target": "claim_status",
+      "selected_model": {
+        "model_name": "random_forest",
+        "artifact": "models/claim_selected_model.joblib",
+        "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+        "selection_reason": "Advanced model selected because it has the stronger test macro F1.",
+        "test_macro_f1": 0.356695,
+        "test_weighted_f1": 0.456436,
+        "test_business_recall": 0.492188
+      },
+      "feature_set_artifact": "data_outputs/phase3/claim_feature_set.json",
+      "metrics_artifact": "data_outputs/phase3/claim_model_metrics.json"
+    },
+    "time_based_split": {
+      "risk_sort_columns": [
+        "visit_date",
+        "visit_id"
+      ],
+      "claim_sort_columns": [
+        "billing_date",
+        "bill_id"
+      ],
+      "train_ratio": 0.8,
+      "test_ratio": 0.2
+    },
+    "model_artifacts_directory": "models"
   }
 }

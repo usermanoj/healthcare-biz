@@ -1,0 +1,48 @@
+{
+  "task_name": "risk",
+  "target": "risk_score",
+  "categorical_features": [
+    "gender",
+    "city",
+    "insurance_provider",
+    "department",
+    "visit_type",
+    "doctor_id",
+    "age_band"
+  ],
+  "numeric_features": [
+    "age",
+    "chronic_flag",
+    "length_of_stay_hours",
+    "patient_prior_visit_count",
+    "patient_prior_avg_los_hours",
+    "patient_prior_avg_los_missing_flag",
+    "days_since_registration",
+    "visit_before_registration_flag",
+    "visit_month",
+    "visit_quarter",
+    "visit_day_of_week",
+    "visit_week_of_year",
+    "visit_is_weekend"
+  ],
+  "leakage_exclusions": [
+    "risk_score",
+    "high_risk_flag",
+    "claim_status",
+    "claim_rejected_flag",
+    "claim_pending_flag",
+    "approved_amount",
+    "payment_days",
+    "approved_to_billed_ratio",
+    "revenue_gap_amount",
+    "visit_realization_ratio",
+    "department_high_risk_rate"
+  ],
+  "feature_justification": {
+    "patient demographics": "age, gender, city, chronic status, and age band capture patient-level risk context.",
+    "visit operations": "department, visit type, doctor assignment, and LOS describe encounter complexity and resource use.",
+    "patient history": "prior visit count and prior average LOS capture repeat-utilization and historical operational burden.",
+    "timing": "visit month, weekday, weekend flag, and registration timing support seasonal and operational-flow analysis.",
+    "quality flags": "temporal anomaly and missing-history flags preserve known reliability issues from Phase 2."
+  }
+}

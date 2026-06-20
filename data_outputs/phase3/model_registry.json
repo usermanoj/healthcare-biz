@@ -1,0 +1,37 @@
+{
+  "created_at_utc": "2026-06-20T06:40:35+00:00",
+  "source_model_table": "data_outputs/model_table.csv",
+  "feature_schema": "data_outputs/feature_schema.json",
+  "models": [
+    {
+      "task": "risk",
+      "target": "risk_score",
+      "selected_model": {
+        "model_name": "logistic_regression",
+        "artifact": "models/risk_selected_model.joblib",
+        "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+        "selection_reason": "Baseline selected because macro F1 is within 0.01 of the advanced model and business-critical recall is higher.",
+        "test_macro_f1": 0.330425,
+        "test_weighted_f1": 0.357097,
+        "test_business_recall": 0.301758
+      },
+      "baseline_artifact": "models/risk_logistic_regression.joblib",
+      "advanced_artifact": "models/risk_random_forest.joblib"
+    },
+    {
+      "task": "claim",
+      "target": "claim_status",
+      "selected_model": {
+        "model_name": "random_forest",
+        "artifact": "models/claim_selected_model.joblib",
+        "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+        "selection_reason": "Advanced model selected because it has the stronger test macro F1.",
+        "test_macro_f1": 0.356695,
+        "test_weighted_f1": 0.456436,
+        "test_business_recall": 0.492188
+      },
+      "baseline_artifact": "models/claim_logistic_regression.joblib",
+      "advanced_artifact": "models/claim_random_forest.joblib"
+    }
+  ]
+}

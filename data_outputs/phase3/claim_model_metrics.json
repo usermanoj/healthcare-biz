@@ -1,0 +1,634 @@
+{
+  "task_name": "claim",
+  "business_name": "Claim Outcome Classification",
+  "business_purpose": "Predict whether an insurance claim will be Paid, Pending, or Rejected before submission to support proactive revenue-risk control.",
+  "target": "claim_status",
+  "labels": [
+    "Paid",
+    "Pending",
+    "Rejected"
+  ],
+  "features": {
+    "categorical": [
+      "gender",
+      "city",
+      "insurance_provider",
+      "department",
+      "visit_type",
+      "doctor_id",
+      "age_band"
+    ],
+    "numeric": [
+      "age",
+      "chronic_flag",
+      "length_of_stay_hours",
+      "billed_amount",
+      "patient_prior_visit_count",
+      "patient_prior_avg_los_hours",
+      "patient_prior_avg_los_missing_flag",
+      "provider_prior_claim_count",
+      "provider_prior_rejection_rate",
+      "provider_prior_rejection_missing_flag",
+      "days_since_registration",
+      "billing_lag_days",
+      "visit_before_registration_flag",
+      "billing_before_visit_flag",
+      "same_day_billing_flag",
+      "visit_month",
+      "visit_quarter",
+      "visit_day_of_week",
+      "visit_week_of_year",
+      "visit_is_weekend",
+      "billing_month",
+      "billing_day_of_week",
+      "high_billed_amount_flag",
+      "billed_amount_outlier_flag",
+      "length_of_stay_hours_outlier_flag"
+    ],
+    "all": [
+      "gender",
+      "city",
+      "insurance_provider",
+      "department",
+      "visit_type",
+      "doctor_id",
+      "age_band",
+      "age",
+      "chronic_flag",
+      "length_of_stay_hours",
+      "billed_amount",
+      "patient_prior_visit_count",
+      "patient_prior_avg_los_hours",
+      "patient_prior_avg_los_missing_flag",
+      "provider_prior_claim_count",
+      "provider_prior_rejection_rate",
+      "provider_prior_rejection_missing_flag",
+      "days_since_registration",
+      "billing_lag_days",
+      "visit_before_registration_flag",
+      "billing_before_visit_flag",
+      "same_day_billing_flag",
+      "visit_month",
+      "visit_quarter",
+      "visit_day_of_week",
+      "visit_week_of_year",
+      "visit_is_weekend",
+      "billing_month",
+      "billing_day_of_week",
+      "high_billed_amount_flag",
+      "billed_amount_outlier_flag",
+      "length_of_stay_hours_outlier_flag"
+    ],
+    "leakage_exclusions": [
+      "claim_status",
+      "claim_rejected_flag",
+      "claim_pending_flag",
+      "approved_amount",
+      "payment_days",
+      "approved_amount_missing_flag",
+      "payment_days_missing_flag",
+      "approved_amount_zero_flag",
+      "approved_amount_zero_or_missing_flag",
+      "approved_to_billed_ratio",
+      "revenue_gap_amount",
+      "visit_realization_ratio",
+      "provider_rejection_rate",
+      "provider_rejected_claims",
+      "department_revenue_realization_ratio"
+    ],
+    "feature_justification": {
+      "claim economics": "billed amount and high-bill flags represent financial exposure known at claim creation.",
+      "patient and encounter context": "demographics, department, visit type, doctor, chronic status, and LOS describe claim complexity.",
+      "payer history": "prior provider rejection rate uses only earlier claims and supports payer-risk estimation.",
+      "timing": "billing lag and visit/billing calendar fields support payment-cycle and process-pattern learning.",
+      "quality flags": "temporal anomaly and outlier flags preserve known data-reliability signals without using claim outcomes."
+    }
+  },
+  "split": {
+    "train_rows": 20000,
+    "test_rows": 5000,
+    "train_start": "2025-01-20",
+    "train_end": "2025-11-10",
+    "test_start": "2025-11-10",
+    "test_end": "2026-01-20",
+    "sort_columns": [
+      "billing_date",
+      "bill_id"
+    ]
+  },
+  "class_distribution": {
+    "all": {
+      "Paid": {
+        "count": 14940,
+        "pct": 59.76
+      },
+      "Pending": {
+        "count": 6263,
+        "pct": 25.05
+      },
+      "Rejected": {
+        "count": 3797,
+        "pct": 15.19
+      }
+    },
+    "train": {
+      "Paid": {
+        "count": 11964,
+        "pct": 59.82
+      },
+      "Pending": {
+        "count": 5007,
+        "pct": 25.04
+      },
+      "Rejected": {
+        "count": 3029,
+        "pct": 15.14
+      }
+    },
+    "test": {
+      "Paid": {
+        "count": 2976,
+        "pct": 59.52
+      },
+      "Pending": {
+        "count": 1256,
+        "pct": 25.12
+      },
+      "Rejected": {
+        "count": 768,
+        "pct": 15.36
+      }
+    }
+  },
+  "imbalance_strategy": {
+    "observed_issue": "Class proportions are not equal; minority classes are evaluated with macro F1 and business-critical recall.",
+    "mitigation": "Use class_weight='balanced' for Logistic Regression and class_weight='balanced_subsample' for Random Forest."
+  },
+  "baseline_logistic_regression": {
+    "artifact": "models/claim_logistic_regression.joblib",
+    "train_metrics": {
+      "accuracy": 0.3476,
+      "balanced_accuracy": 0.38872,
+      "macro_f1": 0.335595,
+      "weighted_f1": 0.369498,
+      "business_recall_class": "Rejected",
+      "business_recall": 0.493562,
+      "classification_report": {
+        "Paid": {
+          "precision": 0.6642632649288224,
+          "recall": 0.3003176195252424,
+          "f1-score": 0.4136303459391009,
+          "support": 11964.0
+        },
+        "Pending": {
+          "precision": 0.2898009950248756,
+          "recall": 0.3722788096664669,
+          "f1-score": 0.3259026138648483,
+          "support": 5007.0
+        },
+        "Rejected": {
+          "precision": 0.18323323936756955,
+          "recall": 0.49356223175965663,
+          "f1-score": 0.2672506256703611,
+          "support": 3029.0
+        },
+        "accuracy": 0.3476,
+        "macro avg": {
+          "precision": 0.37909916644042246,
+          "recall": 0.3887195536504553,
+          "f1-score": 0.3355945284914368,
+          "support": 20000.0
+        },
+        "weighted avg": {
+          "precision": 0.4976646382871175,
+          "recall": 0.3476,
+          "f1-score": 0.3694984995796111,
+          "support": 20000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          3593,
+          3641,
+          4730
+        ],
+        [
+          1209,
+          1864,
+          1934
+        ],
+        [
+          607,
+          927,
+          1495
+        ]
+      ],
+      "labels": [
+        "Paid",
+        "Pending",
+        "Rejected"
+      ]
+    },
+    "test_metrics": {
+      "accuracy": 0.288,
+      "balanced_accuracy": 0.351877,
+      "macro_f1": 0.280168,
+      "weighted_f1": 0.306201,
+      "business_recall_class": "Rejected",
+      "business_recall": 0.596354,
+      "classification_report": {
+        "Paid": {
+          "precision": 0.6650853889943074,
+          "recall": 0.23555107526881722,
+          "f1-score": 0.34789081885856077,
+          "support": 2976.0
+        },
+        "Pending": {
+          "precision": 0.2599444958371878,
+          "recall": 0.22372611464968153,
+          "f1-score": 0.24047924689773215,
+          "support": 1256.0
+        },
+        "Rejected": {
+          "precision": 0.15986038394415358,
+          "recall": 0.5963541666666666,
+          "f1-score": 0.2521332232314891,
+          "support": 768.0
+        },
+        "accuracy": 0.288,
+        "macro avg": {
+          "precision": 0.3616300895918829,
+          "recall": 0.3518771188617218,
+          "f1-score": 0.2801677629959273,
+          "support": 5000.0
+        },
+        "weighted avg": {
+          "precision": 0.48571143585753535,
+          "recall": 0.288,
+          "f1-score": 0.3062006652936824,
+          "support": 5000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          701,
+          619,
+          1656
+        ],
+        [
+          224,
+          281,
+          751
+        ],
+        [
+          129,
+          181,
+          458
+        ]
+      ],
+      "labels": [
+        "Paid",
+        "Pending",
+        "Rejected"
+      ]
+    }
+  },
+  "advanced_random_forest": {
+    "artifact": "models/claim_random_forest.joblib",
+    "best_params": {
+      "n_estimators": 160,
+      "max_depth": 14,
+      "min_samples_leaf": 3
+    },
+    "tuning_results": [
+      {
+        "params": {
+          "n_estimators": 120,
+          "max_depth": 10,
+          "min_samples_leaf": 5
+        },
+        "validation_macro_f1": 0.358598,
+        "validation_weighted_f1": 0.411113,
+        "validation_business_recall": 0.6944
+      },
+      {
+        "params": {
+          "n_estimators": 160,
+          "max_depth": 14,
+          "min_samples_leaf": 3
+        },
+        "validation_macro_f1": 0.381331,
+        "validation_weighted_f1": 0.481579,
+        "validation_business_recall": 0.3472
+      },
+      {
+        "params": {
+          "n_estimators": 200,
+          "max_depth": null,
+          "min_samples_leaf": 5
+        },
+        "validation_macro_f1": 0.345581,
+        "validation_weighted_f1": 0.491788,
+        "validation_business_recall": 0.1056
+      }
+    ],
+    "train_metrics": {
+      "accuracy": 0.7082,
+      "balanced_accuracy": 0.756432,
+      "macro_f1": 0.691771,
+      "weighted_f1": 0.735637,
+      "business_recall_class": "Rejected",
+      "business_recall": 0.909871,
+      "classification_report": {
+        "Paid": {
+          "precision": 0.922798833819242,
+          "recall": 0.6614008692744902,
+          "f1-score": 0.7705341058474122,
+          "support": 11964.0
+        },
+        "Pending": {
+          "precision": 0.8825757575757576,
+          "recall": 0.6980227681246255,
+          "f1-score": 0.7795249247239879,
+          "support": 5007.0
+        },
+        "Rejected": {
+          "precision": 0.3691895512391159,
+          "recall": 0.9098712446351931,
+          "f1-score": 0.5252525252525253,
+          "support": 3029.0
+        },
+        "accuracy": 0.7082,
+        "macro avg": {
+          "precision": 0.7248547142113718,
+          "recall": 0.7564316273447697,
+          "f1-score": 0.6917705186079752,
+          "support": 20000.0
+        },
+        "weighted avg": {
+          "precision": 0.8288848608349255,
+          "recall": 0.7082,
+          "f1-score": 0.7356370619720674,
+          "support": 20000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          7913,
+          442,
+          3609
+        ],
+        [
+          412,
+          3495,
+          1100
+        ],
+        [
+          250,
+          23,
+          2756
+        ]
+      ],
+      "labels": [
+        "Paid",
+        "Pending",
+        "Rejected"
+      ]
+    },
+    "test_metrics": {
+      "accuracy": 0.4682,
+      "balanced_accuracy": 0.400805,
+      "macro_f1": 0.356695,
+      "weighted_f1": 0.456436,
+      "business_recall_class": "Rejected",
+      "business_recall": 0.492188,
+      "classification_report": {
+        "Paid": {
+          "precision": 0.6420651420651421,
+          "recall": 0.6226478494623656,
+          "f1-score": 0.6322074377345616,
+          "support": 2976.0
+        },
+        "Pending": {
+          "precision": 0.2682926829268293,
+          "recall": 0.0875796178343949,
+          "f1-score": 0.13205282112845138,
+          "support": 1256.0
+        },
+        "Rejected": {
+          "precision": 0.22183098591549297,
+          "recall": 0.4921875,
+          "f1-score": 0.3058252427184466,
+          "support": 768.0
+        },
+        "accuracy": 0.4682,
+        "macro avg": {
+          "precision": 0.37739627030248807,
+          "recall": 0.4008049890989202,
+          "f1-score": 0.3566951671938199,
+          "support": 5000.0
+        },
+        "weighted avg": {
+          "precision": 0.48362553394501184,
+          "recall": 0.4682,
+          "f1-score": 0.4564362928886314,
+          "support": 5000.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          1853,
+          232,
+          891
+        ],
+        [
+          711,
+          110,
+          435
+        ],
+        [
+          322,
+          68,
+          378
+        ]
+      ],
+      "labels": [
+        "Paid",
+        "Pending",
+        "Rejected"
+      ]
+    },
+    "feature_importance_artifact": "data_outputs/phase3/claim_random_forest_feature_importance.csv",
+    "top_feature_importance": [
+      {
+        "feature": "num__billed_amount",
+        "importance": 0.18385198447611886
+      },
+      {
+        "feature": "num__days_since_registration",
+        "importance": 0.05072343052261718
+      },
+      {
+        "feature": "num__provider_prior_rejection_rate",
+        "importance": 0.050411351564553904
+      },
+      {
+        "feature": "num__length_of_stay_hours",
+        "importance": 0.05000235563801983
+      },
+      {
+        "feature": "num__provider_prior_claim_count",
+        "importance": 0.049045465088311015
+      },
+      {
+        "feature": "num__billing_lag_days",
+        "importance": 0.04724579575276679
+      },
+      {
+        "feature": "num__patient_prior_avg_los_hours",
+        "importance": 0.045229288555964114
+      },
+      {
+        "feature": "num__age",
+        "importance": 0.04418427377794342
+      },
+      {
+        "feature": "num__visit_week_of_year",
+        "importance": 0.03715938816245975
+      },
+      {
+        "feature": "num__high_billed_amount_flag",
+        "importance": 0.02795514919376414
+      },
+      {
+        "feature": "num__billing_day_of_week",
+        "importance": 0.025296575108294615
+      },
+      {
+        "feature": "num__visit_day_of_week",
+        "importance": 0.02513824808461276
+      },
+      {
+        "feature": "num__billing_month",
+        "importance": 0.023870739800786352
+      },
+      {
+        "feature": "num__visit_month",
+        "importance": 0.023206579874469762
+      },
+      {
+        "feature": "num__patient_prior_visit_count",
+        "importance": 0.022642236133122436
+      },
+      {
+        "feature": "num__visit_quarter",
+        "importance": 0.011353399681606072
+      },
+      {
+        "feature": "num__chronic_flag",
+        "importance": 0.009530846139445237
+      },
+      {
+        "feature": "num__billed_amount_outlier_flag",
+        "importance": 0.008627019685617215
+      },
+      {
+        "feature": "cat__gender_F",
+        "importance": 0.008542351315547985
+      },
+      {
+        "feature": "cat__gender_M",
+        "importance": 0.00786989288497285
+      },
+      {
+        "feature": "cat__visit_type_ICU",
+        "importance": 0.00782420155835043
+      },
+      {
+        "feature": "cat__visit_type_OPD",
+        "importance": 0.007771232293944195
+      },
+      {
+        "feature": "cat__visit_type_ER",
+        "importance": 0.007515087171013899
+      },
+      {
+        "feature": "cat__insurance_provider_MediCareX",
+        "importance": 0.007037551209987592
+      },
+      {
+        "feature": "cat__insurance_provider_SecureLife",
+        "importance": 0.007028846803855185
+      },
+      {
+        "feature": "num__visit_is_weekend",
+        "importance": 0.006884029120394912
+      },
+      {
+        "feature": "cat__insurance_provider_HealthPlus",
+        "importance": 0.006732393121804926
+      },
+      {
+        "feature": "num__visit_before_registration_flag",
+        "importance": 0.006706248196323012
+      },
+      {
+        "feature": "cat__city_Delhi",
+        "importance": 0.006402003195676701
+      },
+      {
+        "feature": "cat__insurance_provider_CareOne",
+        "importance": 0.006180211165275802
+      },
+      {
+        "feature": "cat__age_band_36-50",
+        "importance": 0.006096508350596621
+      },
+      {
+        "feature": "cat__department_Neurology",
+        "importance": 0.0058802589396328075
+      },
+      {
+        "feature": "cat__city_Hyderabad",
+        "importance": 0.005878325154181187
+      },
+      {
+        "feature": "cat__age_band_51-65",
+        "importance": 0.005837152972045369
+      },
+      {
+        "feature": "cat__department_Orthopedics",
+        "importance": 0.005690969669625514
+      },
+      {
+        "feature": "cat__department_Cardiology",
+        "importance": 0.005690055576014381
+      },
+      {
+        "feature": "cat__department_ER",
+        "importance": 0.005687457558782353
+      },
+      {
+        "feature": "cat__city_Chennai",
+        "importance": 0.005589347562052335
+      },
+      {
+        "feature": "cat__city_Mumbai",
+        "importance": 0.005551240681021011
+      },
+      {
+        "feature": "cat__city_Pune",
+        "importance": 0.005520219929622156
+      }
+    ]
+  },
+  "selected_model": {
+    "model_name": "random_forest",
+    "artifact": "models/claim_selected_model.joblib",
+    "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+    "selection_reason": "Advanced model selected because it has the stronger test macro F1.",
+    "test_macro_f1": 0.356695,
+    "test_weighted_f1": 0.456436,
+    "test_business_recall": 0.492188
+  }
+}
