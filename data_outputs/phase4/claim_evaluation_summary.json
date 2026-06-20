@@ -1,0 +1,125 @@
+{
+  "task_name": "claim",
+  "target": "claim_status",
+  "selected_model": {
+    "model_name": "random_forest",
+    "artifact": "models/claim_selected_model.joblib",
+    "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+    "selection_reason": "Advanced model selected because it has the stronger test macro F1.",
+    "test_macro_f1": 0.356695,
+    "test_weighted_f1": 0.456436,
+    "test_business_recall": 0.492188
+  },
+  "model_purpose": "Identify claim outcome risk before submission to reduce revenue leakage.",
+  "stakeholders": [
+    "finance teams",
+    "revenue-cycle teams",
+    "hospital administrators"
+  ],
+  "labels": [
+    "Paid",
+    "Pending",
+    "Rejected"
+  ],
+  "train_metrics": {
+    "accuracy": 0.7082,
+    "balanced_accuracy": 0.756432,
+    "macro_precision": 0.724855,
+    "macro_recall": 0.756432,
+    "macro_f1": 0.691771,
+    "weighted_f1": 0.735637,
+    "business_class": "Rejected",
+    "business_recall": 0.909871
+  },
+  "test_metrics": {
+    "accuracy": 0.4682,
+    "balanced_accuracy": 0.400805,
+    "macro_precision": 0.377396,
+    "macro_recall": 0.400805,
+    "macro_f1": 0.356695,
+    "weighted_f1": 0.456436,
+    "business_class": "Rejected",
+    "business_recall": 0.492188
+  },
+  "fairness_gap_summary": [
+    {
+      "segment_column": "city",
+      "min_recall_segment": "Delhi",
+      "min_business_recall": 0.401786,
+      "max_recall_segment": "Bangalore",
+      "max_business_recall": 0.533835,
+      "business_recall_gap": 0.132049,
+      "segments_evaluated": 6
+    },
+    {
+      "segment_column": "gender",
+      "min_recall_segment": "M",
+      "min_business_recall": 0.458333,
+      "max_recall_segment": "F",
+      "max_business_recall": 0.522059,
+      "business_recall_gap": 0.063726,
+      "segments_evaluated": 2
+    },
+    {
+      "segment_column": "insurance_provider",
+      "min_recall_segment": "SecureLife",
+      "min_business_recall": 0.408377,
+      "max_recall_segment": "CareOne",
+      "max_business_recall": 0.596386,
+      "business_recall_gap": 0.188009,
+      "segments_evaluated": 4
+    }
+  ],
+  "top_explainability_items": [
+    {
+      "feature": "num__billed_amount",
+      "importance": 0.1838519844761188,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__days_since_registration",
+      "importance": 0.0507234305226171,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__provider_prior_rejection_rate",
+      "importance": 0.0504113515645539,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__length_of_stay_hours",
+      "importance": 0.0500023556380198,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__provider_prior_claim_count",
+      "importance": 0.049045465088311,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__billing_lag_days",
+      "importance": 0.0472457957527667,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__patient_prior_avg_los_hours",
+      "importance": 0.0452292885559641,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__age",
+      "importance": 0.0441842737779434,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__visit_week_of_year",
+      "importance": 0.0371593881624597,
+      "explainability_type": "random_forest_impurity_importance"
+    },
+    {
+      "feature": "num__high_billed_amount_flag",
+      "importance": 0.0279551491937641,
+      "explainability_type": "random_forest_impurity_importance"
+    }
+  ]
+}

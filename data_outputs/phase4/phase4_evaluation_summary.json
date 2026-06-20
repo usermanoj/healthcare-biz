@@ -1,0 +1,8 @@
+{
+  "risk_selected_model": "logistic_regression",
+  "risk_test_macro_f1": 0.330425,
+  "risk_test_business_recall": 0.301758,
+  "claim_selected_model": "random_forest",
+  "claim_test_macro_f1": 0.356695,
+  "claim_test_business_recall": 0.492188
+}

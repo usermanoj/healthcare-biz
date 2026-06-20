@@ -1,0 +1,13 @@
+segment_column,segment_value,row_count,accuracy,business_class,business_class_support,business_recall,prediction_business_class_rate,actual_business_class_rate
+city,Delhi,795,0.447799,Rejected,112,0.401786,0.327044,0.140881
+city,Mumbai,831,0.483755,Rejected,120,0.475,0.315283,0.144404
+city,Chennai,810,0.460494,Rejected,129,0.496124,0.348148,0.159259
+city,Hyderabad,893,0.490482,Rejected,143,0.51049,0.354983,0.160134
+city,Pune,853,0.463072,Rejected,131,0.519084,0.350528,0.153576
+city,Bangalore,818,0.46088,Rejected,133,0.533835,0.347188,0.162592
+gender,M,2411,0.483202,Rejected,360,0.458333,0.316051,0.149316
+gender,F,2589,0.454229,Rejected,408,0.522059,0.363847,0.15759
+insurance_provider,SecureLife,1210,0.482645,Rejected,191,0.408377,0.294215,0.157851
+insurance_provider,MediCareX,1326,0.481146,Rejected,226,0.455752,0.319005,0.170437
+insurance_provider,HealthPlus,1246,0.445425,Rejected,185,0.52973,0.378812,0.148475
+insurance_provider,CareOne,1218,0.463054,Rejected,166,0.596386,0.371921,0.136289

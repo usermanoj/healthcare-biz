@@ -1,0 +1,4 @@
+segment_column,min_recall_segment,min_business_recall,max_recall_segment,max_business_recall,business_recall_gap,segments_evaluated
+city,Delhi,0.401786,Bangalore,0.533835,0.132049,6
+gender,M,0.458333,F,0.522059,0.063726,2
+insurance_provider,SecureLife,0.408377,CareOne,0.596386,0.188009,4

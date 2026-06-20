@@ -457,5 +457,76 @@
       "test_ratio": 0.2
     },
     "model_artifacts_directory": "models"
+  },
+  "phase4_evaluation_explainability": {
+    "updated_at_utc": "2026-06-20T06:57:38+00:00",
+    "evaluation_output_dir": "data_outputs/phase4",
+    "risk": {
+      "selected_model": {
+        "model_name": "logistic_regression",
+        "artifact": "models/risk_selected_model.joblib",
+        "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+        "selection_reason": "Baseline selected because macro F1 is within 0.01 of the advanced model and business-critical recall is higher.",
+        "test_macro_f1": 0.330425,
+        "test_weighted_f1": 0.357097,
+        "test_business_recall": 0.301758
+      },
+      "train_metrics": {
+        "accuracy": 0.36235,
+        "balanced_accuracy": 0.376164,
+        "macro_precision": 0.371616,
+        "macro_recall": 0.376164,
+        "macro_f1": 0.355825,
+        "weighted_f1": 0.372147,
+        "business_class": "High",
+        "business_recall": 0.4202
+      },
+      "test_metrics": {
+        "accuracy": 0.3462,
+        "balanced_accuracy": 0.337394,
+        "macro_precision": 0.338318,
+        "macro_recall": 0.337394,
+        "macro_f1": 0.330425,
+        "weighted_f1": 0.357097,
+        "business_class": "High",
+        "business_recall": 0.301758
+      },
+      "fairness_gap_summary_artifact": "data_outputs/phase4/risk_fairness_gap_summary.csv",
+      "explainability_artifact": "data_outputs/phase4/risk_selected_model_explainability.csv"
+    },
+    "claim": {
+      "selected_model": {
+        "model_name": "random_forest",
+        "artifact": "models/claim_selected_model.joblib",
+        "selection_rule": "Select higher test macro F1; if macro F1 is within 0.01, prefer the model with stronger business-critical recall.",
+        "selection_reason": "Advanced model selected because it has the stronger test macro F1.",
+        "test_macro_f1": 0.356695,
+        "test_weighted_f1": 0.456436,
+        "test_business_recall": 0.492188
+      },
+      "train_metrics": {
+        "accuracy": 0.7082,
+        "balanced_accuracy": 0.756432,
+        "macro_precision": 0.724855,
+        "macro_recall": 0.756432,
+        "macro_f1": 0.691771,
+        "weighted_f1": 0.735637,
+        "business_class": "Rejected",
+        "business_recall": 0.909871
+      },
+      "test_metrics": {
+        "accuracy": 0.4682,
+        "balanced_accuracy": 0.400805,
+        "macro_precision": 0.377396,
+        "macro_recall": 0.400805,
+        "macro_f1": 0.356695,
+        "weighted_f1": 0.456436,
+        "business_class": "Rejected",
+        "business_recall": 0.492188
+      },
+      "fairness_gap_summary_artifact": "data_outputs/phase4/claim_fairness_gap_summary.csv",
+      "explainability_artifact": "data_outputs/phase4/claim_selected_model_explainability.csv"
+    },
+    "model_card_artifact": "data_outputs/phase4/model_card.json"
   }
 }
